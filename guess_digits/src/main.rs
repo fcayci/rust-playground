@@ -5,14 +5,14 @@ use rand::Rng;
 fn main() {
     println!("Guess digits game.");
     println!("+2 / -2 stuff...");
+    println!("... tho careful with replicates...");
 
     let number = rand::thread_rng().gen_range(1000..10000);
     let _number: String = number.to_string();
     let mut steps = 0;
-    println!("My number is {number}");
+    // println!("My number is {number}");
 
     loop {
-
         println!("Enter 4 digit number:");
         let mut guess = String::new();
 
@@ -23,6 +23,11 @@ fn main() {
         let _guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
             Err(_) => continue,
+        };
+
+        if _guess < 1000 || _guess > 9999
+        {
+            continue;
         };
 
         let mut pres = 0;
@@ -38,6 +43,8 @@ fn main() {
                 }
             }
         }
+
+        steps += 1;
 
         if pres == 4 {
             break;
